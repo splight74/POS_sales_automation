@@ -6,8 +6,12 @@ import openpyxl
 from openpyxl.utils import get_column_letter
 
 # --- 설정 ---
-API_KEY = "AIzaSyAJvjCsfk5LuOumDZPlMwQqw6PtFG6LMW4EY"
-genai.configure(api_key=API_KEY)
+# 코드를 이렇게 바꾸면, 실제 키는 웹사이트 설정창(Secrets)에서 읽어오게 됩니다.
+if "GEMINI_API_KEY" in st.secrets:
+    API_KEY = st.secrets["GEMINI_API_KEY"]
+    genai.configure(api_key=API_KEY)
+else:
+    st.error("API Key가 설정되지 않았습니다. Streamlit Cloud의 Secrets 설정을 확인해주세요.")
 
 st.set_page_config(page_title="POS 데이터 마스터", layout="wide")
 st.title("🪄 POS 데이터 자동화 (서식 보존형)")
@@ -66,4 +70,5 @@ if st.button("🚀 데이터 업데이트 시작"):
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
     else:
+
         st.warning("파일을 모두 올려주세요.")
