@@ -13,8 +13,20 @@ if "GEMINI_API_KEY" in st.secrets:
 else:
     st.error("API Key가 설정되지 않았습니다. Streamlit Cloud의 Secrets 설정을 확인해주세요.")
 
-st.set_page_config(page_title="POS 데이터 마스터", layout="wide")
-st.title("🪄 POS 데이터 자동화 (서식 보존형)")
+# st.set_page_config(page_title="POS 데이터 마스터", layout="wide")
+# st.title("🪄 POS 데이터 자동화 (서식 보존형)")
+
+# 기존 st.title 대신 아래 코드를 넣으세요
+st.markdown(
+    """
+    <h1 style='text-align: center; font-size: 40px;'>
+        🪄 IT팀_POS 메뉴별 판매 Data 자동화<br>
+        <span style='font-size: 35px; color: gray;'>(서식 보존형)</span>
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
+st.markdown("---") # 구분선
 
 # 파일 업로드
 master_file = st.file_uploader("1. 마스터 파일 업로드", type=['xlsx'])
@@ -72,3 +84,4 @@ if st.button("🚀 데이터 업데이트 시작"):
     else:
 
         st.warning("파일을 모두 올려주세요.")
+
